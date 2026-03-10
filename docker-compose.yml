@@ -1,0 +1,27 @@
+services:
+
+  backend:
+    build: ./backend
+    container_name: pro001-backend
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pro001db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: viraj@123
+    restart: always
+    networks:
+      - vrj-cloud
+
+  frontend:
+    build: ./frontend
+    container_name: pro001-frontend
+    ports:
+      - "4001:80"
+    restart: always
+    networks:
+      - vrj-cloud
+
+networks:
+  vrj-cloud:
+    external: true
